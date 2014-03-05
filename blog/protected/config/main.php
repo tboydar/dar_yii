@@ -18,7 +18,11 @@ return array(
 		'application.components.*',
 	),
 
-	'modules'=>array(
+    'modules'=>array(
+        'gii'=>array(  //!! this is only for produce level 
+            'class'=>'system.gii.GiiModule',
+            'password'=>'larvata',    
+        )
 		// uncomment the following to enable the Gii tool
 		/*
 		'gii'=>array(
@@ -48,8 +52,10 @@ return array(
 		),
 		*/
 		'db'=>array(
-			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-		),
+            'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/blog.db',
+            'tablePrefix'=>'tbl_',
+        ),
+        //'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		// uncomment the following to use a MySQL database
 		/*
 		'db'=>array(
