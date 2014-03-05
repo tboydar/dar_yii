@@ -8,3 +8,11 @@ Stack trace:
 #5 {main}
 REQUEST_URI=/dar_yii/blog/index.php?r=site/contact;
 ---
+2014/03/05 16:50:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "post".' in /Applications/MAMP/htdocs/dar_yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Applications/MAMP/htdocs/dar_yii/framework/web/CWebApplication.php(141): CWebApplication->runController('post')
+#1 /Applications/MAMP/htdocs/dar_yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /Applications/MAMP/htdocs/dar_yii/blog/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/dar_yii/blog/index.php?r=post
+---
