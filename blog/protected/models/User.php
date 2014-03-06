@@ -14,11 +14,27 @@ class User extends CActiveRecord
 	/**
 	 * @return string the associated database table name
 	 */
-	public function tableName()
+    //public $salt = uniqid('',true);
+
+
+    public function tableName()
 	{
 		return '{{user}}';
-	}
+    }
 
+    public function validatePassword($password)
+    {
+
+        return CPasswordHelper::hashPassword($password);
+
+    //    return $this->hashPassword($password,$this->salt)===$this->password;
+    }
+
+    public function hashPassword($password,$salt)
+    {
+       return md5($salt.$password); 
+    }
+    
 	/**
 	 * @return array validation rules for model attributes.
 	 */
