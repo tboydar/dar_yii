@@ -19,6 +19,8 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
+    <?php echo $form->dropDownList($model,'status',Lookup::items('PostStatus')); ?>
+
 	<div class="row">
 		<?php echo $form->labelEx($model,'title'); ?>
 		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>128)); ?>
