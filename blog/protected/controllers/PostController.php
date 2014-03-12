@@ -48,7 +48,8 @@ class PostController extends Controller
     {
         $post = $this->loadModel();
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+            //'model'=>$this->loadModel($id),
+            'model'=>$post,
 		));
 	}
     
@@ -108,7 +109,38 @@ class PostController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete()
+    protected function beforeSave()
+    {
+        if(parent::beforeSave())
+        {
+            if($this->isNewRecord)
+                {
+                    $this->create_time=$this->update_time=time();
+                    $this->author_id=Yii::app()->user->id;
+                            }
+                else
+                    $this->update_time=time();
+                return true;
+            }
+        else
+            return false;
+    }
+
+    protected function afterSave()
+    {
+        parent::afterSave();
+        Tag::model()->updateFrequency($this->_oldTags, $this->tags);
+    }
+    
+    private $_oldTags;
+    
+    protected function afterFind()
+    {
+        parent::afterFind();
+        $this->_oldTags=$this->tags;
+    } 
+   
+    public function actionDelete()
     {
 
         if(Yii::app()->request->isPostRequest)
@@ -119,6 +151,13 @@ class PostController extends Controller
                 $this->redirect(array('index'));
         }else
             throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+    }
+
+    protected function afterDelete()
+    {
+        parent:;afterDelete();
+        Comment:model()->deleteAll('post_id='.$this->id);
+        Tag::model()->updateFrequency($this->tags,'');
     }
 
 	/**
@@ -151,8 +190,7 @@ class PostController extends Controller
 	 */
 	public function actionAdmin()
 	{
-        $model=new Post('search');
-        
+        $model=new Post('search'); 
         if(isset($_GET['Post']))
             $model->attributes=$_GET['Post'];
         $this->render('admin',array(
@@ -177,7 +215,7 @@ class PostController extends Controller
                      $condition='status='.Post::STATUS_PUBLISHED.' OR status='.Post::STATUS_ARCHIVED;
                 else
                     $condition='';
-                $this->_model=Post::mode()->findByPk($_GET['id'], $condition);
+                $this->_model=Post::model()->findByPk($_GET['id'], $condition);
             }
             if($this->_model===null)
                 throw new CHttpException(404,'The requested page does not exit. from Post controller');
