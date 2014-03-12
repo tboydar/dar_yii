@@ -22,7 +22,7 @@
     <?php echo $form->dropDownList($model,'status',Lookup::items('PostStatus')); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'title'); ?>
+        <?php echo $form->labelEx($model,'title'); ?>
 		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>128)); ?>
 		<?php echo $form->error($model,'title'); ?>
 	</div>
@@ -39,10 +39,11 @@
 		<?php echo $form->error($model,'tags'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'status'); ?>
-		<?php echo $form->textField($model,'status'); ?>
-		<?php echo $form->error($model,'status'); ?>
+    <div class="row">
+        <?php //echo $form->dropDownList($model,'status',Lookup::items('PostStatus')); ?>
+		<?php // echo $form->labelEx($model,'status'); ?>
+		<?php //echo $form->textField($model,'status'); ?>
+		<?php //echo $form->error($model,'status'); ?>
 	</div>
 
 	<div class="row">
