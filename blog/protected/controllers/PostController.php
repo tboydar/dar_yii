@@ -54,7 +54,6 @@ class PostController extends Controller
 
         print_r($comment);
         print_r($post);
-        print_r($post->aaa());
 
 		$this->render('view',array(
             //'model'=>$this->loadModel($id),
