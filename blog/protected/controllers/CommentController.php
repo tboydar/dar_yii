@@ -11,7 +11,20 @@ class CommentController extends Controller
 	/**
 	 * @return array action filters
 	 */
-	public function filters()
+
+    protected function beforeSave()
+    {
+        if(parent::beforeSave())
+        {
+            if($this->isNewRecord)
+                $this->create_time=time();
+                return true;
+            }
+        else
+            return false;
+    }
+
+    public function filters()
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations

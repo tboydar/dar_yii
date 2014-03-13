@@ -55,7 +55,7 @@ class Post extends CActiveRecord
 
 	/**
 	 * @return array relational rules.
-	 */
+     */
 	public function relations()
 	{
 		// NOTE: you may need to adjust the relation name and the related
@@ -73,14 +73,14 @@ class Post extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Id',
-			'title' => 'Title',
-			'content' => 'Content',
-			'tags' => 'Tags',
-			'status' => 'Status',
+			'id' => 'Id編號',
+			'title' => 'Title名稱',
+			'content' => 'Content內容',
+			'tags' => 'Tags標籤',
+			'status' => 'Status狀態',
 			'create_time' => 'Create Time',
 			'update_time' => 'Update Time',
-			'author_id' => 'Author',
+			'author_id' => 'Author作者',
 		);
 	}
 
@@ -119,7 +119,12 @@ class Post extends CActiveRecord
 	 * This method will set status and post_id of the comment accordingly.
 	 * @param Comment the comment to be added
 	 * @return boolean whether the comment is saved successfully
-	 */
+     */
+    public function aaa()
+    {
+        
+    }
+
 	public function addComment($comment)
 	{
 		if(Yii::app()->params['commentNeedApproval'])

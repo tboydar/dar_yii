@@ -23,6 +23,7 @@ class Post extends CActiveRecord
     const STATUS_PUBLISHED=2;
     const STATUS_ARCHIVED=3;
 
+
     protected function beforeSave()
     {
         if(parent::beforeSave())
@@ -175,5 +176,14 @@ class Post extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
-	}
+    }
+    public function addComment($comment)
+    {
+        if(Yii::app()->params['commentNeedApproval'])
+            $comment->status=Comment::STATUS_PENDING;
+        else
+            $comment->status=Comment::STATUS_APPROVED;
+        $comment->post_id=$this->id;
+        return $comment->save();
+    }
 }
