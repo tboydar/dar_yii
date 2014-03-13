@@ -55,7 +55,7 @@ class Post extends CActiveRecord
 
 	/**
 	 * @return array relational rules.
-	 */
+     */
 	public function relations()
 	{
 		// NOTE: you may need to adjust the relation name and the related
@@ -119,7 +119,11 @@ class Post extends CActiveRecord
 	 * This method will set status and post_id of the comment accordingly.
 	 * @param Comment the comment to be added
 	 * @return boolean whether the comment is saved successfully
-	 */
+     */
+    public function aaaComent()
+    {
+        
+    }
 	public function addComment($comment)
 	{
 		if(Yii::app()->params['commentNeedApproval'])

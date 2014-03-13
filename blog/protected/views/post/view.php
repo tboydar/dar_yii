@@ -17,7 +17,31 @@ $this->menu=array(
 ?>
 
 <h1>View Post #<?php echo $model->id; ?></h1>
+<div id="comments">
+    <?php if($model->commentCount>=1): ?>
+        <h3>
+            <?php echo $model->commentCount . 'comment(s)'; ?>
+        </h3>
+ 
+<?php $this->renderPartial('_comments',array(
+    'post'=>$model,
+    'comments'=>$model->comments,
+)); ?>
+    <?php endif; ?>
+</div></h3></div>
+ <h3>Leave a Comment</h3>
 
+    <?php if(Yii::app()->user->hasFlash('commentSubmitted')): ?>
+        <div class="flash-success">
+            <?php echo Yii::app()->user->getFlash('commentSubmitted'); ?>
+        </div>
+    <?php else: ?>
+<?php $this->renderPartial('/comment/_form',array(
+    'model'=>$comment,
+)); ?>
+    <?php endif; ?>
+</div></h3>
+<?php echo "test"; ?>
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(

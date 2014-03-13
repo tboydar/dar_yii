@@ -8,6 +8,7 @@ class PostController extends Controller
 	 */
 	public $layout='//layouts/column2';
 
+    private $_model;
 	/**
 	 * @return array action filters
 	 */
@@ -47,13 +48,38 @@ class PostController extends Controller
 	public function actionView()
     {
         $post = $this->loadModel();
+        
+        $comment = $this->newComment($post);
+
 		$this->render('view',array(
             //'model'=>$this->loadModel($id),
             'model'=>$post,
+            'comment'=>$comment,
 		));
 	}
-    
-    private $_model;
+
+
+    protected function newComment($post)
+    {
+        $comment=new Comment;
+
+        if(isset($_POST['Comment']))
+        {
+            print_r($post);
+            $post->aaaComment();
+
+            $comment->attributes=$_POST['Comment'];
+            if($post->addComment($comment))
+            {
+                if($comment->status==Comment::STATUS_PENDING)
+                    Yii::app()->user->setFlash('commentSubmitted','Thank you for your comment. Your comment will be posted once it is approved.');
+                $this->refresh();
+            }
+        }
+        return $comment;
+    }
+
+
 
    
 

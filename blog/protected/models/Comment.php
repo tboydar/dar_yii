@@ -37,12 +37,13 @@ class Comment extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('content, status, author, email, post_id', 'required'),
-			array('status, create_time, post_id', 'numerical', 'integerOnly'=>true),
+			array('content, author, email', 'required'),
 			array('author, email, url', 'length', 'max'=>128),
+            array('email','email'),
+            array('url','url'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, content, status, create_time, author, email, url, post_id', 'safe', 'on'=>'search'),
+			//array('id, content, status, create_time, author, email, url, post_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,13 +65,13 @@ class Comment extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'content' => 'Content',
-			'status' => 'Status',
+			'id' => 'ID編號',
+			'content' => 'Content內容',
+			'status' => 'Status狀態',
 			'create_time' => 'Create Time',
-			'author' => 'Author',
-			'email' => 'Email',
-			'url' => 'Url',
+			'author' => 'Name姓名',
+			'email' => 'Email電子郵件',
+			'url' => 'Website',
 			'post_id' => 'Post',
 		);
 	}
