@@ -29,6 +29,7 @@ $this->menu=array(
 )); ?>
     <?php endif; ?>
 </div></h3></div>
+
  <h3>Leave a Comment</h3>
 
     <?php if(Yii::app()->user->hasFlash('commentSubmitted')): ?>
@@ -41,7 +42,9 @@ $this->menu=array(
 )); ?>
     <?php endif; ?>
 </div></h3>
+
 <?php echo "test"; ?>
+
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(

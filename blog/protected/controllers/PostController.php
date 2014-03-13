@@ -51,6 +51,11 @@ class PostController extends Controller
         
         $comment = $this->newComment($post);
 
+
+        print_r($comment);
+        print_r($post);
+        print_r($post->aaa());
+
 		$this->render('view',array(
             //'model'=>$this->loadModel($id),
             'model'=>$post,
@@ -59,29 +64,31 @@ class PostController extends Controller
 	}
 
 
+
     protected function newComment($post)
     {
         $comment=new Comment;
-
+     
+        if(isset($_POST['ajax']) && $_POST['ajax']==='comment-form')
+        {
+                echo CActiveForm::validate($comment);
+                Yii::app()->end();
+            }
+     
         if(isset($_POST['Comment']))
         {
-            print_r($post);
-            $post->aaaComment();
-
             $comment->attributes=$_POST['Comment'];
+         
             if($post->addComment($comment))
-            {
-                if($comment->status==Comment::STATUS_PENDING)
-                    Yii::app()->user->setFlash('commentSubmitted','Thank you for your comment. Your comment will be posted once it is approved.');
-                $this->refresh();
+                {
+                    if($comment->status==Comment::STATUS_PENDING)
+                        Yii::app()->user->setFlash('commentSubmitted','Thank you for your comment. Your comment will be posted once it is approved.');
+                    $this->refresh();
+                            }
             }
-        }
         return $comment;
     }
 
-
-
-   
 
 	/**
 	 * Creates a new model.
