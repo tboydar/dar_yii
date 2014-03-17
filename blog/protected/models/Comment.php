@@ -28,7 +28,12 @@ class Comment extends CActiveRecord
 	{
 		return '{{comment}}';
 	}
-
+    
+    public function approve()
+    {
+        $this->status=Comment::STATUS_APPROVED;
+        $this->update(array('status'));
+    }
 	/**
 	 * @return array validation rules for model attributes.
 	 */
